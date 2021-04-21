@@ -1,0 +1,1 @@
+A simple react blog application to practice microservices architecture patterns
