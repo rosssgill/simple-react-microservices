@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import CommentCreate from './CommentCreate';
+import CommentList from './CommentList';
 
 export default () => {
     const [posts, setPosts] = useState({});
@@ -10,10 +12,12 @@ export default () => {
         setPosts(res.data);
     };
 
+    // We only want this effect to be called one time on rendering so we put empty array as second argument
     useEffect(() => {
         fetchPosts();
     }, []);
 
+    // Mapping over array of posts and displaying them as card objects
     const renderedPosts = Object.values(posts).map(post => {
         return (
             <div
@@ -23,6 +27,8 @@ export default () => {
             >
                 <div className="card-body">
                     <h3>{post.title}</h3>
+                    <CommentList postId={post.id} />
+                    <CommentCreate postId={post.id} />
                 </div>
             </div>
         );
